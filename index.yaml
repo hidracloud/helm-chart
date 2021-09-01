@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   hidra:
   - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-09-01T17:58:50.268057342Z"
+    description: 'This is a Helm chart for HIDRA. It is a containerized application
+      that is designed to be used as a service in a Kubernetes cluster. '
+    digest: 34a058d3feaf66a3ea3a2ed78f914a4494766ab8619f065ef4b572386e029923
+    name: hidra
+    type: application
+    urls:
+    - https://github.com/hidracloud/helm-chart/releases/download/hidra-1.0.1/hidra-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2021-09-01T17:54:09.61251466Z"
     description: 'This is a Helm chart for HIDRA. It is a containerized application
@@ -12,4 +23,4 @@ entries:
     urls:
     - https://github.com/hidracloud/helm-chart/releases/download/hidra-1.0.0/hidra-1.0.0.tgz
     version: 1.0.0
-generated: "2021-09-01T17:54:09.61252016Z"
+generated: "2021-09-01T17:58:50.268070743Z"
