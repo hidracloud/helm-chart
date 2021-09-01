@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Release.Name }}-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}-api
+    app.kubernetes.io/managed-by: {{ .Release.ManagedBy }}
+    app.kubernetes.io/component: api
+
+  annotations:
+    kubernetes.io/change-cause: "{{ .Values.deployments.api.image }}"
+  
+spec:
+  replicas: "{{ .Values.deployments.api.replicas }}"
+
+  template:
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-api
+        image: "{{ .Values.deployments.api.image }}"
+        imagePullPolicy: "{{ .Values.deployments.api.imagePullPolicy }}"
+        ports:
+        - name: http
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /api/ping
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /api/ping
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources: {{ toYaml .Values.deployments.api.resources | indent 12 }}
+        env:
+          API: true
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-config
+        - secretRef:
+            name: {{ .Release.Name }}-config
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Release.Name }}-metrics
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}-metrics
+    app.kubernetes.io/managed-by: {{ .Release.ManagedBy }}
+    app.kubernetes.io/component: metrics
+
+  annotations:
+    kubernetes.io/change-cause: "{{ .Values.deployments.metrics.image }}"
+  
+spec:
+  replicas: "{{ .Values.deployments.metrics.replicas }}"
+
+  template:
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-metrics
+        image: "{{ .Values.deployments.metrics.image }}"
+        imagePullPolicy: "{{ .Values.deployments.metrics.imagePullPolicy }}"
+        ports:
+        - name: http
+          containerPort: 9096
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources: {{ toYaml .Values.deployments.metrics.resources | indent 12 }}
+        env:
+          METRIC: true
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-config
+        - secretRef:
+            name: {{ .Release.Name }}-config

@@ -1,8 +1,8 @@
 apiVersion: v2
-appVersion: 1.0.1
+appVersion: 1.0.0
 description: |
   This is a Helm chart for HIDRA. It is a containerized application that is
   designed to be used as a service in a Kubernetes cluster.
 name: hidra
-version: 1.0.1
+version: 1.0.2
 type: application

@@ -1,2 +1,19 @@
-images:
-  api: ghcr.io/hidracloud:latest
+# Configure deployment values for the chart
+#
+deployments:
+  api:
+    replicas: 1
+    image: ghcr.io/hidracloud:v1.0.0-beta.9
+    imagePullPolicy: IfNotPresent
+    resources: {}
+  metrics:
+    replicas: 1
+    image: ghcr.io/hidracloud:v1.0.0-beta.9
+    imagePullPolicy: IfNotPresent
+    resources: {}
+    config:
+      pull_seconds: 15
+
+dbconfig:
+  dbtype: mysql
+  dburi: ""
