@@ -5,3 +5,4 @@ description: |
   designed to be used as a service in a Kubernetes cluster.
 name: hidra
 version: 1.0.0
+type: application

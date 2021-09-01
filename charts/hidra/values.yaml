@@ -1,0 +1,5 @@
+images:
+  api:
+    image:
+      repository: ghcr.io/hidracloud
+      tag: latest
