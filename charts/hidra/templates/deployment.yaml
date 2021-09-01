@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hidra
+  labels:
+    app: hidra
+    chart: hidra
+    release: hidra
+    heritage: Tiller
+spec:
+
+  replicas: 1
+  selector:
+
+    matchLabels:
+      app: hidra
+      release: hidra
+      chart: hidra
+  template:
+
+    metadata:
+
+      labels:
+
+        app: hidra
+        release: hidra
+        chart: hidra
+    spec:
+
+      containers:
+
+        - name: hidra
+          image: "{{.Values.images.api}}"
+          imagePullPolicy: Always
