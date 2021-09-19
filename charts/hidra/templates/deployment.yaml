@@ -2,24 +2,30 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ .Release.Name }}-api
-  namespace: {{ .Release.Namespace }}
+  name: "{{ .Release.Name }}-api"
+  namespace: "{{ .Release.Namespace }}"
   labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}-api
-    app.kubernetes.io/managed-by: {{ .Release.ManagedBy }}
-    app.kubernetes.io/component: api
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}-api"
+    app.kubernetes.io/component: "api"
 
   annotations:
     kubernetes.io/change-cause: "{{ .Values.deployments.api.image }}"
   
 spec:
-  replicas: "{{ .Values.deployments.api.replicas }}"
-
+  replicas: {{ .Values.deployments.api.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}-api"
   template:
+    metadata:
+        labels:
+          app.kubernetes.io/name: "{{ .Release.Name }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}-api"
     spec:
       containers:
-      - name: {{ .Release.Name }}-api
+      - name: "{{ .Release.Name }}-api"
         image: "{{ .Values.deployments.api.image }}"
         imagePullPolicy: "{{ .Values.deployments.api.imagePullPolicy }}"
         ports:
@@ -39,35 +45,43 @@ spec:
           periodSeconds: 5
         resources: {{ toYaml .Values.deployments.api.resources | indent 12 }}
         env:
-          API: true
+          - name: API
+            value: "true"
         envFrom:
         - configMapRef:
-            name: {{ .Release.Name }}-config
+            name: "{{ .Release.Name }}-config"
         - secretRef:
-            name: {{ .Release.Name }}-config
+            name: "{{ .Release.Name }}-config"
 ---
 apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ .Release.Name }}-metrics
-  namespace: {{ .Release.Namespace }}
+  name: "{{ .Release.Name }}-metrics"
+  namespace: "{{ .Release.Namespace }}"
   labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}-metrics
-    app.kubernetes.io/managed-by: {{ .Release.ManagedBy }}
-    app.kubernetes.io/component: metrics
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}-metrics"
+    app.kubernetes.io/component: "metrics"
 
   annotations:
     kubernetes.io/change-cause: "{{ .Values.deployments.metrics.image }}"
   
 spec:
-  replicas: "{{ .Values.deployments.metrics.replicas }}"
-
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}-metrics"
   template:
+    metadata:
+        labels:
+          app.kubernetes.io/name: "{{ .Release.Name }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}-metrics"
     spec:
+
       containers:
-      - name: {{ .Release.Name }}-metrics
+      - name: "{{ .Release.Name }}-metrics"
         image: "{{ .Values.deployments.metrics.image }}"
         imagePullPolicy: "{{ .Values.deployments.metrics.imagePullPolicy }}"
         ports:
@@ -87,9 +101,10 @@ spec:
           periodSeconds: 5
         resources: {{ toYaml .Values.deployments.metrics.resources | indent 12 }}
         env:
-          METRIC: true
+          - name: METRIC
+            value: "true"
         envFrom:
         - configMapRef:
-            name: {{ .Release.Name }}-config
+            name: "{{ .Release.Name }}-config"
         - secretRef:
-            name: {{ .Release.Name }}-config
+            name: "{{ .Release.Name }}-config"

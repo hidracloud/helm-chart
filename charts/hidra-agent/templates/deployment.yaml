@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: "{{ .Release.Name }}-agent"
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}-agent"
+    app.kubernetes.io/component: "agent"
+
+  annotations:
+    kubernetes.io/change-cause: "{{ .Values.deployments.agent.image }}"
+  
+spec:
+  replicas: {{ .Values.deployments.agent.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}-agent"
+  template:
+    metadata:
+        labels:
+          app.kubernetes.io/name: "{{ .Release.Name }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}-agent"
+    spec:
+      containers:
+      - name: "{{ .Release.Name }}-agent"
+        image: "{{ .Values.deployments.agent.image }}"
+        imagePullPolicy: "{{ .Values.deployments.agent.imagePullPolicy }}"
+        resources: {{ toYaml .Values.deployments.agent.resources | indent 12 }}
+        env:
+          - name: AGENT
+            value: "true"
+          - name: AGENT_SECRET
+            value: "{{ .Values.agent.secret }}"
+          - name: API_URL
+            value: "{{ .Values.agent.apiUrl }}"

@@ -1,0 +1,12 @@
+# Configure deployment values for the chart
+#
+deployments:
+  agent:
+    replicas: 1
+    image: ghcr.io/hidracloud/hidra:v1.0.0
+    imagePullPolicy: IfNotPresent
+    resources: {}
+
+agent:
+  secret: ""
+  apiURL: ""
