@@ -35,4 +35,4 @@ spec:
           - name: AGENT_SECRET
             value: "{{ .Values.agent.secret }}"
           - name: API_URL
-            value: "{{ .Values.agent.apiUrl }}"
+            value: "{{ .Values.agent.apiURL }}"
