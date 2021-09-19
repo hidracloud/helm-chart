@@ -3,6 +3,18 @@ entries:
   hidra:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2021-09-19T21:08:23.136635236Z"
+    description: 'Hidra allows you to monitor your services by declaring scenarios
+      in a simple and sequential way. Do you want to test that your site returns 200
+      and a specific word? No problem, it’s trivial. '
+    digest: 9530ba9011b08bb404eb1edac6d1c7f7c3809cbfd923e5d3275e7704fcea2e18
+    name: hidra
+    type: application
+    urls:
+    - https://github.com/hidracloud/helm-chart/releases/download/hidra-1.0.4/hidra-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2021-09-01T18:23:35.575190555Z"
     description: 'Hidra allows you to monitor your services by declaring scenarios
       in a simple and sequential way. Do you want to test that your site returns 200
@@ -35,4 +47,17 @@ entries:
     urls:
     - https://github.com/hidracloud/helm-chart/releases/download/hidra-1.0.0/hidra-1.0.0.tgz
     version: 1.0.0
-generated: "2021-09-01T18:23:35.575213355Z"
+  hidra-agent:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-09-19T21:08:23.307507737Z"
+    description: 'Hidra allows you to monitor your services by declaring scenarios
+      in a simple and sequential way. Do you want to test that your site returns 200
+      and a specific word? No problem, it’s trivial. '
+    digest: 5e05f28242ed68ad1abf211d81601d6f704e8d837ebd7745b944bd8309954e0c
+    name: hidra-agent
+    type: application
+    urls:
+    - https://github.com/hidracloud/helm-chart/releases/download/hidra-agent-1.0.0/hidra-agent-1.0.0.tgz
+    version: 1.0.0
+generated: "2021-09-19T21:08:23.307525437Z"
