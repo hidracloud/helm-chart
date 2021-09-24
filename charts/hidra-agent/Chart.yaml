@@ -1,7 +1,7 @@
 apiVersion: v2
-appVersion: 1.0.0
+appVersion: 1.0.2
 description: |
   Hidra allows you to monitor your services by declaring scenarios in a simple and sequential way. Do you want to test that your site returns 200 and a specific word? No problem, it’s trivial.
 name: hidra-agent
-version: 1.0.1
+version: 1.0.2
 type: application
