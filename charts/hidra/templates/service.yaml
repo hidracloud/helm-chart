@@ -11,3 +11,17 @@ spec:
       protocol: TCP
       port: 8080
       targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Release.Name }}-metrics-service"
+spec:
+  selector:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}-metrics"
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

@@ -3,5 +3,5 @@ appVersion: 1.0.2
 description: |
   Hidra allows you to monitor your services by declaring scenarios in a simple and sequential way. Do you want to test that your site returns 200 and a specific word? No problem, it’s trivial.
 name: hidra
-version: 1.0.6
+version: 1.0.7
 type: application

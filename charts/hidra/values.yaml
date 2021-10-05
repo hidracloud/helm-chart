@@ -14,7 +14,12 @@ deployments:
     config:
       pull_seconds: 15
 ingress:
-  host: metrics.hidra.io
+  api:
+    host: hidra.example.com
+    annotations: {}
+  metrics:  
+    host: metrics.hidra.example.com
+    annotations: {}
 
 dbconfig:
   dbtype: mysql
