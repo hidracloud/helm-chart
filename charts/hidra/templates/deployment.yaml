@@ -108,3 +108,44 @@ spec:
             name: "{{ .Release.Name }}-config"
         - secretRef:
             name: "{{ .Release.Name }}-config"
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: "{{ .Release.Name }}-cron"
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}-cron"
+    app.kubernetes.io/component: "cron"
+
+  annotations:
+    kubernetes.io/change-cause: "{{ .Values.deployments.cron.image }}"
+  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}-cron"
+  template:
+    metadata:
+        labels:
+          app.kubernetes.io/name: "{{ .Release.Name }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}-cron"
+    spec:
+
+      containers:
+      - name: "{{ .Release.Name }}-cron"
+        image: "{{ .Values.deployments.metrics.image }}"
+        imagePullPolicy: "{{ .Values.deployments.cron.imagePullPolicy }}"
+        resources: {{ toYaml .Values.deployments.cron.resources | indent 12 }}
+        env:
+          - name: cron
+            value: "true"
+        envFrom:
+        - configMapRef:
+            name: "{{ .Release.Name }}-config"
+        - secretRef:
+            name: "{{ .Release.Name }}-config"

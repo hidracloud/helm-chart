@@ -3,16 +3,21 @@
 deployments:
   api:
     replicas: 1
-    image: ghcr.io/hidracloud/hidra:v1.0.2
+    image: ghcr.io/hidracloud/hidra:v1.0.5
     imagePullPolicy: IfNotPresent
     resources: {}
   metrics:
     replicas: 1
-    image: ghcr.io/hidracloud/hidra:v1.0.2
+    image: ghcr.io/hidracloud/hidra:v1.0.5
     imagePullPolicy: IfNotPresent
     resources: {}
     config:
       pull_seconds: 15
+  cron:
+    replicas: 1
+    image: ghcr.io/hidracloud/hidra:v1.0.5
+    imagePullPolicy: IfNotPresent
+    resources: {}
 ingress:
   api:
     host: hidra.example.com
@@ -23,4 +28,3 @@ ingress:
 
 dbconfig:
   dbtype: mysql
-  dburi: "mysql://yourdatabase"
