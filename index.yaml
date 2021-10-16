@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   hidra:
   - apiVersion: v2
+    appVersion: 1.0.6
+    created: "2021-10-16T20:56:55.918709343Z"
+    description: 'Hidra allows you to monitor your services by declaring scenarios
+      in a simple and sequential way. Do you want to test that your site returns 200
+      and a specific word? No problem, it’s trivial. '
+    digest: fc77b9f7ec375e0d400a9d20a6bd25a57030487fc5ed265f2a8bafd3ebbfcd26
+    name: hidra
+    type: application
+    urls:
+    - https://github.com/hidracloud/helm-chart/releases/download/hidra-1.0.9/hidra-1.0.9.tgz
+    version: 1.0.9
+  - apiVersion: v2
     appVersion: 1.0.5
     created: "2021-10-07T20:46:34.384774065Z"
     description: 'Hidra allows you to monitor your services by declaring scenarios
@@ -120,4 +132,4 @@ entries:
     urls:
     - https://github.com/hidracloud/helm-chart/releases/download/hidra-agent-1.0.0/hidra-agent-1.0.0.tgz
     version: 1.0.0
-generated: "2021-10-07T20:46:34.385525978Z"
+generated: "2021-10-16T20:56:55.918741843Z"
