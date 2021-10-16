@@ -3,19 +3,19 @@
 deployments:
   api:
     replicas: 1
-    image: ghcr.io/hidracloud/hidra:v1.0.5
+    image: ghcr.io/hidracloud/hidra:v1.0.6
     imagePullPolicy: IfNotPresent
     resources: {}
   metrics:
     replicas: 1
-    image: ghcr.io/hidracloud/hidra:v1.0.5
+    image: ghcr.io/hidracloud/hidra:v1.0.6
     imagePullPolicy: IfNotPresent
     resources: {}
     config:
       pull_seconds: 15
   cron:
     replicas: 1
-    image: ghcr.io/hidracloud/hidra:v1.0.5
+    image: ghcr.io/hidracloud/hidra:v1.0.6
     imagePullPolicy: IfNotPresent
     resources: {}
 ingress:
